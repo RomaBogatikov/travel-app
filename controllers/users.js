@@ -11,28 +11,27 @@ user.get('/new/', (req, res) => {
 });
 
 user.post('/', async (req, res) => {
-  console.log('user post route');
   console.log('req.body=', req.body);
 
   try {
-    const foundUser = await User.find();
-    // console.log('founduser=', foundUser);
-    // console.log('foundUser.username=', foundUser[0].username);
-    // console.log('req.body.username=', req.body.username);
+    // find all users with the same username and password and with the same username
+    // with Promise.all all the requests execute at the same time (thus taking less time to execute). Async ... await with multiple awaits resolves sequentially (one after another)
+    const foundUsers = await Promise.all([User.find({username: req.body.username, password: req.body.password}), User.find({username: req.body.username})]);
+    console.log('data=', foundUsers);
 
     // check if the user already exists
-    // if there is already a user with the same username and password
-    if (foundUser[0].username === req.body.username && foundUser[0].password === req.body.password) {
+    // if there already exists a user with the same username and password
+    if (foundUsers[0].length > 0) {
       // notify the user about it
       console.log('You signed up before. Go to Log In.');
       // redirect the user to login page
+
     // if there is a user with the same username
-    } else if (foundUser[0].username === req.body.username) {
+    } else if (foundUsers[1].length > 0) {
       // notify the user and ask to pick a different username and redirect back to the 'create user' form
       console.log('User with such a username already exists.');
       res.redirect('/travel/users/new');
-    // else create a new user
-    } else {
+    } else {    // the user is new, create it
       User.create(req.body, (err, createdUser) => {
         if (err) {
           console.log(err);
