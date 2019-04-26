@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title></title>
+  </head>
+  <body>
+    <h1>Edit place </h1>
+    <a href="/travel/">Back to Index</a>
+
+    <form action="/travel/<%= place.id%>?_method=PUT" method="POST">
+
+      <label for="city">City</label>
+      <input type="text" name="city" id="city" value="<%= place.city%>" />
+
+      <label for="country">Country</label>
+      <input type="text" name="country" id="country" value="<%= place.country%>" />
+
+      <label for="imgURL">Image URL</label>
+      <input type="url" name="imgURL" id="imgURL" value="<%= place.imgURL%>" />
+
+      <label for="comments">Comments</label>
+      <input type="text" name="comments" id="comments" value="<%= place.comments%>" />
+
+      <input type="submit" value="Update place" />
+
+    </form>
+  </body>
+</html>
