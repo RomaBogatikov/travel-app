@@ -4,7 +4,10 @@ const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
-const Place = require('./models/places.js');
+// require controller (for 7 routes)
+const travelController = require('./controllers/travel.js')
+// require session for authentication
+const session = require('express-session');
 
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3000;
@@ -33,90 +36,16 @@ app.use(express.static('public'));
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 
-//use method override
-app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
+// use method override (allow PUT and DELETE from a form)
+app.use(methodOverride('_method'));
+
+// use travelController
+app.use(travelController);
 
 
 ////////////////
 ///Routes
 ////////////////
-
-// index route
-app.get('/travel/' , (req, res) => {
-  Place.find({}, (error, allPlaces) => {
-    res.render('index.ejs', {
-      places: allPlaces
-    });
-  });
-});
-
-// new route
-app.get('/travel/new', (req, res) => {
-  res.render('new.ejs');
-});
-
-// show route
-app.get('/travel/:id', (req, res) => {
-  // console.log('req.params.id=', req.params.id);
-  Place.findById(req.params.id, (err, foundPlace) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('foundplace show=', foundPlace);
-      res.render('show.ejs', {
-        place: foundPlace
-      });
-    }
-  });
-});
-
-// post route
-app.post('/travel', (req, res) => {
-  Place.create(req.body, (error, createdPlace) => {
-    res.redirect('/travel/');
-  });
-});
-
-// edit route
-app.get('/travel/:id/edit', (req, res) => {
-  Place.findById(req.params.id, (err, foundPlace) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('foundPlace edit=', foundPlace);
-      res.render('edit.ejs', {
-        place: foundPlace
-      });
-    }
-  });
-});
-
-// update route
-app.put('/travel/:id', (req, res) => {
-  console.log('update route', req.params);
-  Place.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedPlace) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('updated place=',updatedPlace)
-      res.render('show.ejs', {
-        place: updatedPlace
-      });
-    }
-  });
-});
-
-// delete route
-app.delete('/travel/:id', (req, res) => {
-  Place.findByIdAndDelete(req.params.id, (err, deletedPlace) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('the deleted place=', deletedPlace);
-      res.redirect('/travel/');
-    }
-  })
-})
 
 
 // seed route
