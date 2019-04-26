@@ -8,6 +8,11 @@ const db = mongoose.connection;
 const travelController = require('./controllers/travel.js')
 // require session for authentication
 const session = require('express-session');
+// require sessions controller
+const sessionsController = require('./controllers/sessions.js');
+// require users controller
+const usersController = require('./controllers/users.js')
+
 
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3000;
@@ -39,8 +44,22 @@ app.use(express.urlencoded({ extended: false }));// extended: false - does not a
 // use method override (allow PUT and DELETE from a form)
 app.use(methodOverride('_method'));
 
+// users controller
+app.use('/travel/users/', usersController)
+
 // use travelController
 app.use(travelController);
+
+// sessions controller
+app.use(session({
+  // secret: process.env.SECRET,
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}))
+// app.use('/travel/sessions/', sessionsController);
+
+
 
 
 ////////////////
