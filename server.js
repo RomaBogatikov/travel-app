@@ -12,7 +12,8 @@ const session = require('express-session');
 const sessionsController = require('./controllers/sessions.js');
 // require users controller
 const usersController = require('./controllers/users.js')
-
+// need to require place for index route (unless I find out how to move index route back to controllers/travel.js)
+const Place = require('./models/places.js');
 
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3000;
@@ -57,7 +58,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-// app.use('/travel/sessions/', sessionsController);
+app.use('/travel/sessions/', sessionsController);
 
 
 
@@ -65,7 +66,16 @@ app.use(session({
 ////////////////
 ///Routes
 ////////////////
+// RESTful routes are in controllers/travel.js
 
+app.get('/travel/' , (req, res) => {
+  Place.find({}, (error, allPlaces) => {
+    res.render('index.ejs', {
+      places: allPlaces,
+      currentUser: req.session.currentUser
+    });
+  });
+});
 
 // seed route
 app.get('/travel/seed', (req, res) => {

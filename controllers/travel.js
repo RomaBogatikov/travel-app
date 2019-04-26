@@ -3,14 +3,15 @@ const router = express.Router();
 // require Place model (collection 'places' in 'travel' database)
 const Place = require('../models/places.js');
 
-// index route
-router.get('/travel/' , (req, res) => {
-  Place.find({}, (error, allPlaces) => {
-    res.render('index.ejs', {
-      places: allPlaces
-    });
-  });
-});
+// // index route
+// router.get('/travel/' , (req, res) => {
+//   Place.find({}, (error, allPlaces) => {
+//     res.render('index.ejs', {
+//       places: allPlaces,
+//       currentUser: req.session.currentUser
+//     });
+//   });
+// });
 
 // new route
 router.get('/travel/new', (req, res) => {

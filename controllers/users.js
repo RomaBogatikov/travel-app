@@ -3,13 +3,13 @@ const user = express.Router();
 const User = require('../models/users.js');
 const session = require('express-session');
 
-// new route (to display a form to create a new user)
-
+// index route (to display a form to create a new user)
 user.get('/new/', (req, res) => {
   // console.log('I am inside new');
   res.render('users/new.ejs')
 });
 
+// post route (to create a new user)
 user.post('/', async (req, res) => {
   console.log('req.body=', req.body);
 

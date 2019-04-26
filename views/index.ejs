@@ -7,8 +7,13 @@
     <body>
         <nav>
             <a href="/travel/new">New place</a>
+            <% if (currentUser) {%>
+              <form action="travel/sessions?_method=DELETE" method="POST">
+                  <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
+              </form>
+            <% } %>
             <a href="/travel/users/new/">Create New User</a>
-            <a href="#">Log In</a>
+            <a href="/travel/sessions/new/">Log In</a>
         </nav>
         <h1>Index page</h1>
         <ul>
