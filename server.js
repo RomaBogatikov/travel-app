@@ -18,6 +18,9 @@ const Place = require('./models/places.js');
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3000;
 
+// require dotenv
+require('dotenv').config();
+
 // How to connect to the database either via heroku or locally
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ `travel`;
 
@@ -53,8 +56,8 @@ app.use(travelController);
 
 // sessions controller
 app.use(session({
-  // secret: process.env.SECRET,
-  secret: 'keyboard cat',
+  secret: process.env.SECRET,
+  // secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }))
