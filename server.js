@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 // How to connect to the database either via heroku or locally
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ `travel/`;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ 'travel';
 
 // Connect to Mongo
 mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true});
@@ -71,7 +71,7 @@ app.use('/travel/sessions/', sessionsController);
 ////////////////
 // RESTful routes are in controllers/travel.js
 
-app.get('travel/' , (req, res) => {
+app.get('/travel/' , (req, res) => {
   Place.find({}, (error, allPlaces) => {
     res.render('index.ejs', {
       places: allPlaces,
