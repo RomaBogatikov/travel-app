@@ -21,6 +21,7 @@ router.get('/travel/new', (req, res) => {
 // show route
 router.get('/travel/:id', (req, res) => {
   // console.log('req.params.id=', req.params.id);
+  console.log('show route');
   Place.findById(req.params.id, (err, foundPlace) => {
     if (err) {
       console.log(err);

@@ -30,7 +30,8 @@ sessions.post('/', (req, res) => {
 });
 
 // destroy route (to log out)
-sessions.delete('/', (req, res)=>{
+sessions.delete('/delete', (req, res)=>{
+  console.log('logout clicked');
   req.session.destroy(() => {
       res.redirect('/travel')
   })
