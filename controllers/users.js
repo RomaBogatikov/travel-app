@@ -2,6 +2,7 @@ const express = require('express');
 const user = express.Router();
 const User = require('../models/users.js');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 // index route (to display a form to create a new user)
 user.get('/new/', (req, res) => {
@@ -32,6 +33,8 @@ user.post('/', async (req, res) => {
       console.log('User with such a username already exists.');
       res.redirect('/travel/users/new');
     } else {    // the user is new, create it
+      // overwrite the user password with the hashed password, then pass that in to database
+      req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
       User.create(req.body, (err, createdUser) => {
         if (err) {
           console.log(err);
