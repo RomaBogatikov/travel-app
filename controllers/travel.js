@@ -76,7 +76,7 @@ router.delete('/travel/:id', (req, res) => {
       console.log(err);
     } else {
       console.log('the deleted place=', deletedPlace);
-      res.redirect('/travel/');
+      res.redirect('/travel');
     }
   })
 })

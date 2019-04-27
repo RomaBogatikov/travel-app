@@ -71,12 +71,13 @@ app.use('/travel/sessions/', sessionsController);
 ///Routes
 ////////////////
 // RESTful routes are in controllers/travel.js
-
+// need this route for heroku deployment
 app.get('/', (req, res) => {
-  res.send('<a href="/travel/">Test</a>');
+  // res.send('<a href="/travel/">Test</a>');
+  res.redirect('/travel');
 })
 
-app.get('/travel/' , (req, res) => {
+app.get('/travel' , (req, res) => {
   Place.find({}, (error, allPlaces) => {
     res.render('index.ejs', {
       places: allPlaces,
@@ -101,7 +102,7 @@ app.get('/travel/seed', (req, res) => {
       comments: ['home of Yale']
     }
   ], (err, data) => {
-    res.redirect('/travel/');
+    res.redirect('/travel');
   });
 });
 
