@@ -71,7 +71,7 @@ app.use('/travel/sessions/', sessionsController);
 ////////////////
 // RESTful routes are in controllers/travel.js
 
-app.get('/travel/' , (req, res) => {
+app.get('travel/' , (req, res) => {
   Place.find({}, (error, allPlaces) => {
     res.render('index.ejs', {
       places: allPlaces,
