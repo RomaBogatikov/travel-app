@@ -6,8 +6,9 @@
     </head>
     <body>
         <nav>
-            <a href="/travel/new">New place</a>
             <% if (currentUser) {%>
+              <a href="/travel/new">New place</a>
+              <a href="#">Favorites</a>
               <form action="/travel/sessions/delete?_method=DELETE" method="POST">
                   <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
               </form>

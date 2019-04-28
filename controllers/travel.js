@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 // require Place model (collection 'places' in 'travel' database)
 const Place = require('../models/places.js');
+const session = require('express-session');
+
+require('dotenv').config();
+
+router.use(session({
+  secret: process.env.SECRET,
+  // secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}))
 
 // // index route
 // router.get('/travel/' , (req, res) => {
@@ -15,20 +25,26 @@ const Place = require('../models/places.js');
 
 // new route
 router.get('/travel/new', (req, res) => {
-  res.render('new.ejs');
+  if (req.session.currentUser) {
+    res.render('new.ejs');
+  } else {
+    res.redirect('/travel/sessions/new');
+  }
 });
 
 // show route
 router.get('/travel/:id', (req, res) => {
   // console.log('req.params.id=', req.params.id);
   console.log('show route');
+  console.log('req.session.currentUser=', req.session.currentUser);
   Place.findById(req.params.id, (err, foundPlace) => {
     if (err) {
       console.log(err);
     } else {
       console.log('foundplace show=', foundPlace);
       res.render('show.ejs', {
-        place: foundPlace
+        place: foundPlace,
+        currentUser: req.session.currentUser
       });
     }
   });

@@ -79,6 +79,7 @@ app.get('/', (req, res) => {
 
 app.get('/travel' , (req, res) => {
   Place.find({}, (error, allPlaces) => {
+    console.log('currentUser = ', req.session.currentUser);
     res.render('index.ejs', {
       places: allPlaces,
       currentUser: req.session.currentUser
@@ -100,6 +101,61 @@ app.get('/travel/seed', (req, res) => {
       country: "USA",
       imgURL: "",
       comments: ['home of Yale']
+    },
+    {
+      city: "New York",
+      country: 'USA',
+      imgURL: 'https://www.pexels.com/photo/aerial-architecture-blue-sky-buildings-466685/'
+    },
+    {
+      city: "Seattle",
+      country: 'USA',
+      imgURL: 'https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?cs=srgb&dl=architecture-buildings-canada-374870.jpg&fm=jpg'
+    },
+    {
+      city: "Chicago",
+      country: 'USA',
+      imgURL: 'https://images.pexels.com/photos/2124696/pexels-photo-2124696.jpeg?cs=srgb&dl=aerial-shot-architecture-bird-s-eye-view-2124696.jpg&fm=jpg'
+    },
+    {
+      city: "Dubai",
+      country: 'United Arab Emirates',
+      imgURL: 'https://images.pexels.com/photos/2124696/pexels-photo-2124696.jpeg?cs=srgb&dl=aerial-shot-architecture-bird-s-eye-view-2124696.jpg&fm=jpg'
+    },
+    {
+      city: "Milan",
+      country: 'Italy',
+      imgURL: 'https://images.pexels.com/photos/409127/pexels-photo-409127.jpeg?cs=srgb&dl=architecture-blue-sky-buildings-409127.jpg&fm=jpg'
+    },
+    {
+      city: "Zurich",
+      country: 'Switzerland',
+      imgURL: 'https://images.pexels.com/photos/773471/pexels-photo-773471.jpeg?cs=srgb&dl=architecture-bahnhofstrasse-buildings-773471.jpg&fm=jpg'
+    },
+    {
+      city: "Singapore",
+      country: 'Singapore',
+      imgURL: 'https://images.pexels.com/photos/711193/pexels-photo-711193.jpeg?cs=srgb&dl=architecture-buildings-city-711193.jpg&fm=jpg'
+    },
+    {
+      city: "Kuala Lumpur",
+      country: 'Malaysia',
+      imgURL: 'https://images.pexels.com/photos/1538177/pexels-photo-1538177.jpeg?cs=srgb&dl=architecture-buildings-city-1538177.jpg&fm=jpg'
+    },
+    {
+      city: "Paris",
+      country: 'France',
+      imgURL: 'https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?cs=srgb&dl=architecture-art-blue-699466.jpg&fm=jpg'
+    },
+    {
+      city: "London",
+      country: 'England',
+      imgURL: 'https://www.pexels.com/photo/big-ben-bridge-castle-city-460672/'
+    },
+    {
+      city: "Santorini",
+      country: 'Greece',
+      imgURL: 'https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?cs=srgb&dl=ancient-architecture-building-1010657.jpg&fm=jpg'
     }
   ], (err, data) => {
     res.redirect('/travel');

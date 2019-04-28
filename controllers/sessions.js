@@ -8,6 +8,8 @@ sessions.get('/new', (req, res) => {
   res.render('sessions/new.ejs');
 });
 
+
+
 // post route (to log in)
 sessions.post('/', (req, res) => {
   console.log('req.body=', req.body);
