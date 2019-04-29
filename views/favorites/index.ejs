@@ -14,6 +14,17 @@
           <% if (places[i].imgURL) {%>
             <a href="/travel/<%= places[i].id%>"><img src=<%= places[i].imgURL%> ></a>
 
+            <form action="/travel/favorites/" method="POST">
+                <input type="hidden" value=<%= places[i].id%> name="places_id" />
+                <input type="submit" value="Remove from Favorites" class="waves-effect waves-light btn"/>
+            </form>
+
+            <ul>
+            <% for (let j = 0; j < places[i].comments.length; j++) {%>
+              <li><%= places[i].comments[j]%></li>
+            <% } %>
+            </ul>
+
           <% } else { %>
             <a href="/travel/<%= places[i].id%>"><img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"></a>
           <% } %>
