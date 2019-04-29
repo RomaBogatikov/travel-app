@@ -47,20 +47,33 @@ favorites.get('/all', async (req, res) => {
 });
 
 // post route
-favorites.post('/all', (req, res) => {
-  req.session.currentUser.places_id.push(req.body.place_id);
-  console.log('/all req.body=', req.body);
-  console.log('/all req.session.currentUser=', req.session.currentUser);
-  // convert to ObjectId
-  req.body.place_id = new mongoose.Types.ObjectId(req.body.place_id);
-  // add place's id to currentUser's 'places_id' array
-  User.findByIdAndUpdate(req.session.currentUser._id, {$push: {"places_id": req.body.place_id}}, {"new": true}, (err, updatedUser) => {
-    if (err) {
-      console.log(error);
+favorites.post('/all', async (req, res) => {
+  try {
+    req.session.currentUser.places_id.push(req.body.place_id);
+    // console.log('/all req.body=', req.body);
+    // console.log('/all req.session.currentUser=', req.session.currentUser);
+    let user = await User.findById(req.session.currentUser._id);
+    console.log('user=', user);
+    // convert to ObjectId
+    // req.body.place_id = new mongoose.Types.ObjectId(req.body.place_id);
+    // add place's id to currentUser's 'places_id' array
+    if (!user.places_id.includes(req.body.place_id)) {
+      User.findByIdAndUpdate(req.session.currentUser._id, {$push: {"places_id": req.body.place_id}}, {"new": true}, (err, updatedUser) => {
+        if (err) {
+          console.log(error);
+        } else {
+          console.log('updatedUser=', updatedUser);
+        }
+      });
     } else {
-      console.log('updatedUser=', updatedUser);
+      console.log('already in the favorites');
+      res.send('<a href="/travel">This destination is in your favorites already</a>');
     }
-  });
+
+  } catch(err) {
+    console.log(err);
+  }
+
 });
 
 favorites.post('/', async (req, res) => {

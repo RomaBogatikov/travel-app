@@ -94,7 +94,7 @@ app.get('/travel' , (req, res) => {
 });
 
 // seed route
-app.get('/travel/seed', (req, res) => {
+app.get('/seed', (req, res) => {
   Place.create([
     {
       city: "Milford",
@@ -105,7 +105,7 @@ app.get('/travel/seed', (req, res) => {
     {
       city: "New Haven",
       country: "USA",
-      imgURL: "",
+      imgURL: "https://cdn.passporthealthusa.com/wp-content/uploads/2018/06/new-haven-clinic-temp-photo.jpg?x71414",
       comments: ['home of Yale']
     },
     {
@@ -126,7 +126,7 @@ app.get('/travel/seed', (req, res) => {
     {
       city: "Dubai",
       country: 'United Arab Emirates',
-      imgURL: 'https://images.pexels.com/photos/2124696/pexels-photo-2124696.jpeg?cs=srgb&dl=aerial-shot-architecture-bird-s-eye-view-2124696.jpg&fm=jpg'
+      imgURL: 'https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg?cs=srgb&dl=architecture-beach-building-2044434.jpg&fm=jpg'
     },
     {
       city: "Milan",

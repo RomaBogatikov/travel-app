@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-        <nav>
-            <% if (currentUser) {%>
-              <a href="/travel/new">New place</a>
-              <a href="travel/favorites/all">Favorites</a>
-              <form action="/travel/sessions/delete?_method=DELETE" method="POST">
-                  <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
-              </form>
-            <% } else {%>
-            <a href="/travel/users/new">Create New User</a>
-            <a href="/travel/sessions/new">Log In</a>
-            <% } %>
-        </nav>
-        <h1>Index page</h1>
-        <ul>
-          <% for (let i = 0; i < places.length; i++) {%>
-            <p><%= places[i].city%></p>
+<head>
+  <meta charset="utf-8">
 
-            <% if (places[i].imgURL) {%>
-              <a href="/travel/<%= places[i].id%>"><img src=<%= places[i].imgURL%> ></a>
-              <% if (currentUser) {%>
-                <form action="/travel/favorites/all" method="POST">
-                  <input type="hidden" value="<%= places[i].id%>" name="place_id" />
-                  <input type="submit" value="Add to Favorites" class="waves-effect waves-light btn"/>
-                </form>
-              <% } %>
-            <% } else { %>
-              <a href="/travel/<%= places[i].id%>"><img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"></a>
-            <% } %>
-          <% } %>
-        </ul>
-    </body>
+  <link rel="stylesheet" href="/CSS/normalize.css">
+  <link rel="stylesheet" href="/CSS/skeleton.css">
+  <link rel="stylesheet" href="/CSS/styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+  <script src="/JS/main.js"></script>
+
+
+
+  <title></title>
+</head>
+
+<body>
+  <div class="container">
+  <header class="header">
+    <img src='../images/travel.jpg'>
+  </header>
+
+  <nav>
+    <% if (currentUser) {%>
+      <a href="/travel/new">New place</a>
+      <a href="travel/favorites/all">Favorites</a>
+      <form action="/travel/sessions/delete?_method=DELETE" method="POST">
+          <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
+      </form>
+    <% } else {%>
+    <a href="/travel/users/new">Create New User</a>
+    <a href="/travel/sessions/new">Log In</a>
+    <% } %>
+  </nav>
+  <h1>Destinations</h1>
+  <main>
+    <% for (let i = 0; i < places.length; i++) {%>
+    <div class="card">
+      <p><%= places[i].city%></p>
+
+      <% if (places[i].imgURL) {%>
+
+        <a href="/travel/<%= places[i].id%>">
+        <div class="img_container">
+          <img class="card_img image" src=<%= places[i].imgURL%> >
+          <div class="middle">
+            <div class="text">Explore!</div>
+          </div>
+        </div>
+        </a>
+
+        <% if (currentUser) {%>
+          <form action="/travel/favorites/all" method="POST">
+            <input type="hidden" value="<%= places[i].id%>" name="place_id" />
+            <input type="submit" value="Add to Favorites" class="waves-effect waves-light btn"/>
+          </form>
+        <% } %>
+      <% } else { %>
+        <a href="/travel/<%= places[i].id%>"><img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"></a>
+      <% } %>
+
+      </div>
+      <% } %>
+    </div>
+  </main>
+</body>
 </html>
