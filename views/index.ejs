@@ -8,20 +8,28 @@
         <nav>
             <% if (currentUser) {%>
               <a href="/travel/new">New place</a>
-              <a href="#">Favorites</a>
+              <a href="travel/favorites/all">Favorites</a>
               <form action="/travel/sessions/delete?_method=DELETE" method="POST">
                   <input type="submit" value="Logout" class="waves-effect waves-light btn"/>
               </form>
-            <% } %>
+            <% } else {%>
             <a href="/travel/users/new">Create New User</a>
             <a href="/travel/sessions/new">Log In</a>
+            <% } %>
         </nav>
         <h1>Index page</h1>
         <ul>
           <% for (let i = 0; i < places.length; i++) {%>
             <p><%= places[i].city%></p>
+
             <% if (places[i].imgURL) {%>
               <a href="/travel/<%= places[i].id%>"><img src=<%= places[i].imgURL%> ></a>
+              <% if (currentUser) {%>
+                <form action="/travel/favorites/all" method="POST">
+                  <input type="hidden" value="<%= places[i].id%>" name="place_id" />
+                  <input type="submit" value="Add to Favorites" class="waves-effect waves-light btn"/>
+                </form>
+              <% } %>
             <% } else { %>
               <a href="/travel/<%= places[i].id%>"><img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"></a>
             <% } %>

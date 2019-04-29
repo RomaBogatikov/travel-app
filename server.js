@@ -11,7 +11,9 @@ const session = require('express-session');
 // require sessions controller
 const sessionsController = require('./controllers/sessions.js');
 // require users controller
-const usersController = require('./controllers/users.js')
+const usersController = require('./controllers/users.js');
+// require favorites controller
+const favoritesController = require('./controllers/favorites.js');
 // need to require place for index route (unless I find out how to move index route back to controllers/travel.js)
 const Place = require('./models/places.js');
 
@@ -54,6 +56,9 @@ app.use('/travel/users/', usersController)
 
 // use travelController
 app.use(travelController);
+
+// use favoritesController
+app.use('/travel/favorites', favoritesController);
 
 // sessions controller
 app.use(session({
