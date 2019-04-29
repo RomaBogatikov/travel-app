@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>Show page</h1>
+    <p><%= place.city%></p>
     <a href="/travel">Back to Index</a>
     <% if (currentUser) {%>
       <a href="/travel/<%= place.id%>/edit">Edit</a>

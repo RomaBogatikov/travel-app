@@ -83,6 +83,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/travel' , (req, res) => {
+  console.log('index route');
   Place.find({}, (error, allPlaces) => {
     console.log('currentUser = ', req.session.currentUser);
     res.render('index.ejs', {

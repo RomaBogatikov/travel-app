@@ -50,10 +50,16 @@ router.get('/travel/:id', (req, res) => {
   });
 });
 
-// post route
+// post route (create)
 router.post('/travel', (req, res) => {
+  console.log('create post route')
   Place.create(req.body, (error, createdPlace) => {
-    res.redirect('/travel/');
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('createdPlace=', createdPlace);
+      res.redirect('/travel');
+    }
   });
 });
 
@@ -80,7 +86,8 @@ router.put('/travel/:id', (req, res) => {
     } else {
       console.log('updated place=',updatedPlace)
       res.render('show.ejs', {
-        place: updatedPlace
+        place: updatedPlace,
+        currentUser: req.session.currentUser
       });
     }
   });
@@ -95,8 +102,10 @@ router.delete('/travel/:id', (req, res) => {
       console.log('the deleted place=', deletedPlace);
       res.redirect('/travel');
     }
-  })
-})
+  });
+});
+
+
 
 
 module.exports = router;
