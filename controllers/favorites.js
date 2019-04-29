@@ -24,6 +24,7 @@ favorites.get('/all', async (req, res) => {
   // });
   try {
     let user = await User.findById(req.session.currentUser._id);
+    console.log('user index route=', user);
     let places = await Place.find({
       // '_id': { $in: req.session.currentUser.places_id }
       '_id': {$in: user.places_id}
@@ -39,8 +40,8 @@ favorites.get('/all', async (req, res) => {
     res.render('favorites/index.ejs', {
       places: places
     })
-  } catch {
-
+  } catch (err) {
+    console.log(err);
   }
 
 });
@@ -62,19 +63,28 @@ favorites.post('/all', (req, res) => {
   });
 });
 
-favorites.post('/', (req, res) => {
-  console.log('req.body.places_id=', req.body.places_id);
-  console.log('req.session.currentUser=', req.session.currentUser);
-  req.session.currentUser.places_id.splice(req.session.currentUser.places_id.indexOf(req.body.places_id), 1);
-  console.log(req.session.currentUser.places_id);
-  User.findByIdAndUpdate(req.session.currentUser._id, req.session.currentUser, {"new": true}, (err, updatedUser) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('updatedUser=', updatedUser);
-      res.redirect('/travel/favorites/all');
-    }
-  })
+favorites.post('/', async (req, res) => {
+  try {
+    console.log('req.body.places_id=', req.body.places_id);
+    console.log('req.session.currentUser=', req.session.currentUser);
+    req.session.currentUser.places_id.splice(req.session.currentUser.places_id.indexOf(req.body.places_id), 1);
+    let user = await User.findById(req.session.currentUser._id);
+    user.places_id.splice(user.places_id.indexOf(req.body.places_id), 1);
+    console.log('user=', user);
+    console.log(req.session.currentUser.places_id);
+    User.findByIdAndUpdate(req.session.currentUser._id, user, {"new": true}, (err, updatedUser) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('updatedUser=', updatedUser);
+        res.redirect('/travel/favorites/all');
+      }
+    })
+    // res.redirect('/travel/favorites/all');
+  } catch (err) {
+    console.log(err);
+  }
+
 })
 
 
