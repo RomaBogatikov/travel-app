@@ -1,19 +1,52 @@
 body {
   margin: 0;
-  background: turquoise;
+  /* background: turquoise; */
 }
 
 .container {
   padding: 0;
-  background: red;
+  /* background: red; */
 }
 
 header {
-  background: darkgoldenrod;
-  height: 10vh;
+  background: rgb(189, 166, 106);
+  height: 20vh;
+
+  display: flex;
 }
 
-header > img {
+.right {
+  flex-grow: 1;
+  overflow: scroll;
+
+  display: flex;
+  align-items: center;
+}
+
+.right > p {
+  margin: 0;
+  text-align: center;
+}
+
+header > div {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  position: relative;
+}
+
+header > div > a > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: whitesmoke;
+  font-weight: 900;
+  font-size: 4rem;
+  opacity: 0.9;
+}
+
+header > div > a > img {
   width: auto;
   height: 100%;
 }
@@ -52,6 +85,31 @@ h1 {
 }
 .card > form > * {
   margin: 0;
+}
+
+nav > a {
+  text-decoration: none;
+  padding: 10px;
+  align-self: center;
+}
+
+nav > a:hover {
+  background: lightblue;
+}
+
+nav {
+  /* background: grey; */
+  display: flex;
+
+}
+nav > form {
+  margin-left: auto;
+  margin-bottom: 0;
+  align-self: center;
+}
+
+.logout {
+  margin-bottom: 0;
 }
 
 /* hover effect over images styling */

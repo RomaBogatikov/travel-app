@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta charset="utf-8">
-      <title></title>
+    <% include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/CSS/styles_sessions_new.css">
   </head>
   <body>
-    <h1>Create a new place </h1>
-    <a href="/travel">Back to Index</a>
+    <div class="wrapper">
+      <h1>Create a new place </h1>
+      <a href="/travel">Back to Index</a>
 
-    <form action="/travel" method="POST">
+      <form action="/travel" method="POST">
+        <div class="row">
+          <div class="four columns">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" class="u-full-width" />
+          </div>
+        </div>
 
-      <label for="city">City</label>
-      <input type="text" name="city" id="city" />
+        <div class="row">
+          <div class="four columns">
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country" class="u-full-width" />
+          </div>
+        </div>
 
-      <label for="country">Country</label>
-      <input type="text" name="country" id="country" />
+        <div class="row">
+          <div class="four columns">
+            <label for="imgURL">Image URL</label>
+            <input type="text" name="imgURL" id="imgURL" class="u-full-width" />
+          </div>
+        </div>
 
-      <label for="imgURL">Image URL</label>
-      <input type="text" name="imgURL" id="imgURL" />
+        <div class="row">
+          <div class="four columns">
+            <label for="comments">Comments</label>
+            <input type="text" name="comments" id="comments" class="u-full-width" />
+          </div>
+        </div>
 
-      <label for="comments">Comments</label>
-      <input type="text" name="comments" id="comments" />
+        <button class="button-primary" type="submit" value="Create new place">Create a new place</button>
 
-      <input type="submit" value="Create new place" />
-
-    </form>
+      </form>
+    </div>
   </body>
 </html>
 

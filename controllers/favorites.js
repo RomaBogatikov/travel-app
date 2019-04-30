@@ -38,7 +38,8 @@ favorites.get('/all', async (req, res) => {
     });
     console.log('places=', places);
     res.render('favorites/index.ejs', {
-      places: places
+      places: places,
+      currentUser: req.session.currentUser
     })
   } catch (err) {
     console.log(err);
