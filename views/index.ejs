@@ -35,7 +35,7 @@
   <nav>
     <% if (currentUser) {%>
       <a href="/travel/new">New place</a>
-      <a href="travel/favorites/all">Favorites</a>
+      <a href="/travel/favorites/all">Favorites</a>
       <form action="/travel/sessions/delete?_method=DELETE" method="POST">
           <input type="submit" value="Logout" class="logout" />
       </form>
