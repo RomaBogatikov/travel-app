@@ -1,36 +1,19 @@
-/* .row {
-
-  text-align: center;
-} */
-/*
-body {
-  text-align: center;
+.wrapper {
+  max-width: 600px;
+  border: 1px solid black;
+  margin: 0 auto;
 }
-
-input {
-  margin-left: 50vw;
-  transform: translate(-50%);
-} */
 
 .wrapper, .row, form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+}
+
+.four.columns, button {
+  align-self: center;
 }
 
 label {
   text-align: center;
 }
-
-/* .row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items:center;
-} */
-
