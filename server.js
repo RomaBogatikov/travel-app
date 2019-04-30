@@ -82,17 +82,6 @@ app.get('/', (req, res) => {
   res.redirect('/travel');
 })
 
-// app.get('/travel' , (req, res) => {
-//   console.log('index route');
-//   Place.find({}, (error, allPlaces) => {
-//     console.log('currentUser = ', req.session.currentUser);
-//     res.render('index.ejs', {
-//       places: allPlaces,
-//       currentUser: req.session.currentUser
-//     });
-//   });
-// });
-
 // seed route
 app.get('/seed', (req, res) => {
   Place.create([
