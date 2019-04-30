@@ -51,11 +51,11 @@ app.use(express.urlencoded({ extended: false }));// extended: false - does not a
 // use method override (allow PUT and DELETE from a form)
 app.use(methodOverride('_method'));
 
-// users controller
-app.use('/travel/users/', usersController)
-
 // use travelController
 app.use(travelController);
+
+// users controller
+app.use('/travel/users/', usersController)
 
 // use favoritesController
 app.use('/travel/favorites', favoritesController);
@@ -82,16 +82,16 @@ app.get('/', (req, res) => {
   res.redirect('/travel');
 })
 
-app.get('/travel' , (req, res) => {
-  console.log('index route');
-  Place.find({}, (error, allPlaces) => {
-    console.log('currentUser = ', req.session.currentUser);
-    res.render('index.ejs', {
-      places: allPlaces,
-      currentUser: req.session.currentUser
-    });
-  });
-});
+// app.get('/travel' , (req, res) => {
+//   console.log('index route');
+//   Place.find({}, (error, allPlaces) => {
+//     console.log('currentUser = ', req.session.currentUser);
+//     res.render('index.ejs', {
+//       places: allPlaces,
+//       currentUser: req.session.currentUser
+//     });
+//   });
+// });
 
 // seed route
 app.get('/seed', (req, res) => {

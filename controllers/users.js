@@ -58,7 +58,9 @@ user.post('/', async (req, res) => {
         } else {
           console.log('createdUser=', createdUser);
           // tried to implement automatic login after new user signs up
-          // req.app.session.currentUser = createdUser;
+          req.session.currentUser = createdUser;
+          console.log('req.session', req.session);
+          console.log('req.session.currentuser', req.session.currentUser);
           res.redirect('/travel/');
 
         }

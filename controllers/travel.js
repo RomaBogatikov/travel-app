@@ -23,6 +23,17 @@ router.use(session({
 //   });
 // });
 
+router.get('/travel' , (req, res) => {
+  console.log('index route');
+  Place.find({}, (error, allPlaces) => {
+    console.log('currentUser = ', req.session.currentUser);
+    res.render('index.ejs', {
+      places: allPlaces,
+      currentUser: req.session.currentUser
+    });
+  });
+});
+
 // new route
 router.get('/travel/new', (req, res) => {
   if (req.session.currentUser) {
