@@ -27,7 +27,7 @@ require('dotenv').config();
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/'+ 'travel';
 
 // Connect to Mongo
-mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true});
+mongoose.connect(MONGODB_URI , {useNewUrlParser: true});
 
 // Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
@@ -42,7 +42,7 @@ db.on('open' , ()=>{});
 /////////////
 
 //use public folder for static assets
-app.use(express.static('public'));
+app.use(express.static('./public'));
 
 
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
