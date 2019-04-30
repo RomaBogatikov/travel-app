@@ -42,7 +42,7 @@ db.on('open' , ()=>{});
 /////////////
 
 //use public folder for static assets
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
