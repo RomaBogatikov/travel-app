@@ -4,6 +4,15 @@ const User = require('../models/users.js');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 
+require('dotenv').config();
+
+user.use(session({
+  secret: process.env.SECRET,
+  // secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+
 // index route (to display a form to create a new user)
 user.get('/new/', (req, res) => {
   // console.log('I am inside new');
@@ -20,8 +29,8 @@ user.post('/', async (req, res) => {
     // const foundUsers = await Promise.all([User.find({username: req.body.username, password: req.body.password}), User.find({username: req.body.username})]);
     const foundUsers = await User.find({username: req.body.username});
     console.log('data=', foundUsers);
-    console.log('req.body.password=', req.body.password);
-    console.log('foundUsers[1].password=', foundUsers[0].password);
+    // console.log('req.body.password=', req.body.password);
+    // console.log('foundUsers[1].password=', foundUsers[0].password);
     // if (bcrypt.compareSync(req.body.password, foundUsers[0].password)) {
     //   console.log('YOU EXIST');
     // };
@@ -30,12 +39,15 @@ user.post('/', async (req, res) => {
     if (foundUsers.length > 0 && bcrypt.compareSync(req.body.password, foundUsers[0].password)) {
       // notify the user about it
       console.log('You signed up before. Go to Log In.');
+      res.send('<a href="/travel">You signed up before. Go to Log In</a>')
       // redirect the user to login page
 
     // if there is a user with the same username
     } else if (foundUsers.length > 0) {
       // notify the user and ask to pick a different username and redirect back to the 'create user' form
       console.log('User with such a username already exists.');
+      // remove res.send below when the alert page is ready
+      res.send("<a href='/travel/users/new'>User with such a username already exists. Pick a different username.</a>");
       res.redirect('/travel/users/new');
     } else {    // the user is new, create it
       // overwrite the user password with the hashed password, then pass that in to database
@@ -45,7 +57,10 @@ user.post('/', async (req, res) => {
           console.log(err);
         } else {
           console.log('createdUser=', createdUser);
+          // tried to implement automatic login after new user signs up
+          // req.app.session.currentUser = createdUser;
           res.redirect('/travel/');
+
         }
       });
     }

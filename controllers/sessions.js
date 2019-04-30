@@ -23,7 +23,7 @@ sessions.post('/', (req, res) => {
       res.send('<a href="sessions/new/">wrong username or password</a>')
     } else if ( bcrypt.compareSync(req.body.password, foundUser.password) ) {
       req.session.currentUser = foundUser;
-      console.log('req.session=', req.session);
+      // console.log('req.app.=', req.app.locals);
       res.redirect('/travel');
     } else {
       res.send('<a href="sessions/new/">wrong username or password</a>')

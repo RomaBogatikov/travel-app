@@ -1,0 +1,36 @@
+/* .row {
+
+  text-align: center;
+} */
+/*
+body {
+  text-align: center;
+}
+
+input {
+  margin-left: 50vw;
+  transform: translate(-50%);
+} */
+
+.wrapper, .row, form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  text-align: center;
+}
+
+/* .row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+} */
+
