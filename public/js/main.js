@@ -12,12 +12,14 @@ $( () => {
   });
 
 
-  var aboveHeight = $('header').outerHeight();
+  let aboveHeight = $('header').outerHeight();
   console.log('aboveHeight=', aboveHeight);
-  var navHeight = $("nav").outerHeight();
+  let navHeight = $("nav").outerHeight();
+
 
   // when scroll
   $('.container').scroll(function(){
+      let containerWidth = $(".container").outerWidth();
       console.log('aboveHeight=', aboveHeight);
       console.log('scrollTop=', $('.container').scrollTop());
       // if scrolled down more than the header’s height
@@ -27,7 +29,7 @@ $( () => {
           // add padding top to the #content
           // (value is same as the height of the nav)
           // $('nav').addClass('fixed').css('top','0').next().css('padding-top','60px');
-          $("nav").css("position", "fixed").css("width", "inherit").css("top", "0").next().css("padding-top", navHeight);
+          $("nav").css("position", "fixed").css("width", `${containerWidth}`).css("top", "0").next().css("padding-top", navHeight);
 
       } else {
 
