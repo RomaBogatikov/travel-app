@@ -10,12 +10,48 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
   <script src="/JS/main.js"></script> %>
     <% include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/css/background.css">
 
   <title></title>
 </head>
 
 <body>
+
+<div class="bg_img">
+	<div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+    <span></span>
+    <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+    <span></span>
+    <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+    <span></span>
+    <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	  <span></span>
+  </div>
+</div>
+
   <div class="container">
+  <%# <div> %>
   <% include ./partials/header.ejs %>
 
   <nav>
@@ -23,7 +59,7 @@
       <a href="/travel/new">New place</a>
       <a href="/travel/favorites/all">Favorites</a>
       <form action="/travel/sessions/delete?_method=DELETE" method="POST">
-          <input type="submit" value="Logout" class="logout" />
+          <input type="submit" value="Log out" class="logout" />
       </form>
     <% } else {%>
     <a href="/travel/users/new">Create New User</a>
@@ -60,6 +96,7 @@
       </div>
       <% } %>
     </div>
+    // </div>
   </main>
 </body>
 </html>

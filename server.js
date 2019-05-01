@@ -100,7 +100,7 @@ app.get('/seed', (req, res) => {
     {
       city: "New York",
       country: 'USA',
-      imgURL: 'https://www.pexels.com/photo/aerial-architecture-blue-sky-buildings-466685/'
+      imgURL: 'https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     },
     {
       city: "Seattle",
@@ -140,12 +140,12 @@ app.get('/seed', (req, res) => {
     {
       city: "Paris",
       country: 'France',
-      imgURL: 'https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?cs=srgb&dl=architecture-art-blue-699466.jpg&fm=jpg'
+      imgURL: 'https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?cs=srgb&dl=architecture-buildings-church-338515.jpg&fm=jpg'
     },
     {
       city: "London",
       country: 'England',
-      imgURL: 'https://www.pexels.com/photo/big-ben-bridge-castle-city-460672/'
+      imgURL: 'https://images.pexels.com/photos/726484/pexels-photo-726484.jpeg?cs=srgb&dl=ancient-architecture-bridge-726484.jpg&fm=jpg'
     },
     {
       city: "Santorini",
