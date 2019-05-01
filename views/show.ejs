@@ -8,21 +8,7 @@
 
   <div class="container">
 
-    <header class="header">
-      <div class="left">
-      <a href="/travel">
-        <img src='../images/travel.jpg'>
-        <span>Resfeber</span>
-      </a>
-      </div>
-      <div class="right">
-      <% if (!currentUser) {%>
-        <p>Resfeber (n.) Origin: Swedish. Definition: The restless race of the traveller's heart before the journey begins, when anxiety and anticipation are tangled together.</p>
-      <% } else {%>
-        <p style="font-size: 4rem; display: inline-block; margin: 0 auto;">Welcome, <%= currentUser.username %></p>
-      <% } %>
-      </div>
-    </header>
+    <% include ./partials/header.ejs %>
 
 
     <nav>
@@ -30,16 +16,16 @@
 
         <a href="/travel"><- back</a>
         <form action="/travel/sessions/delete?_method=DELETE" method="POST">
-            <input type="submit" value="Logout" class="logout" />
+          <input type="submit" value="Logout" class="logout" />
         </form>
       <% } else {%>
-      <a href="/travel/users/new">Create New User</a>
-      <a href="/travel/sessions/new">Log In</a>
+        <a href="/travel/users/new">Create New User</a>
+        <a href="/travel/sessions/new">Log In</a>
       <% } %>
     </nav>
 
 
-    <h1>Show page</h1>
+    <%# <h1>Show page</h1> %>
     <h1><%= place.city%></h1>
 
 
@@ -56,6 +42,19 @@
       <li><%= place.comments[j]%></li>
     <% } %>
     </ul>
+
+    <%# Functionality to leave comments %>
+
+    <% if (currentUser) {%>
+      <form action="/travel/sessions/comments" method="POST">
+        <input type="hidden" name="username" value="<%= currentUser.username%>" />
+        <input type="hidden" name="user_id" value="<%= currentUser._id%>" />
+        <input type="hidden" name="place_id" value="<%= place.id%>" />
+        <label for="comment">Leave a comment:</label>
+        <textarea class="u-full-width" placeholder="leave your comments here" name="comment" id="comment"></textarea>
+        <input type="submit" value="submit" />
+      </form>
+    <% } %>
 
   </div>
   </body>

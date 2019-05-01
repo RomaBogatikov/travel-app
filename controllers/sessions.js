@@ -1,11 +1,14 @@
 const express = require('express');
 const sessions = express.Router();
 const User = require('../models/users.js');
+const Place = require('../models/places.js');
 const bcrypt = require('bcrypt');
 
 // index route
 sessions.get('/new', (req, res) => {
-  res.render('sessions/new.ejs');
+  res.render('sessions/new.ejs', {
+    currentUser: req.session.currentUser
+  });
 });
 
 
@@ -39,5 +42,38 @@ sessions.delete('/delete', (req, res)=>{
   })
 })
 
+
+// post route (to leave comments)
+sessions.post('/comments', async (req, res) => {
+  console.log('received comment', req.body);
+  try {
+    let place = await Place.findById(req.body.place_id);
+    let user = await User.findById(req.body.user_id);
+    console.log('place=', place);
+    console.log('user=', user);
+    let place_comments = place.comments.concat(req.body.username + ": " + req.body.comment);
+    let user_comments = user.comments.concat(req.body.comment);
+    console.log('place_comments=', place_comments);
+    console.log('user_comments=', user_comments);
+    Place.findByIdAndUpdate(req.body.place_id, {comments: place_comments}, {new: true}, (err, updatedPlace) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('updatedPlace=', updatedPlace);
+      }
+    });
+    User.findByIdAndUpdate(req.body.user_id, {comments: user_comments}, {new: true}, (err, updatedUser) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('updatedUser=', updatedUser);
+      }
+    });
+    req.session.currentUser.comments.concat(req.body.comment);
+    res.redirect('/travel/' + req.body.place_id);
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 module.exports = sessions

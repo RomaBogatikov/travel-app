@@ -16,7 +16,9 @@ user.use(session({
 // index route (to display a form to create a new user)
 user.get('/new/', (req, res) => {
   // console.log('I am inside new');
-  res.render('users/new.ejs')
+  res.render('users/new.ejs', {
+    currentUser: req.session.currentUser
+  })
 });
 
 // post route (to create a new user)

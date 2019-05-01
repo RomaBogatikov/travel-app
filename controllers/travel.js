@@ -23,6 +23,8 @@ router.use(session({
 //   });
 // });
 
+
+// index route
 router.get('/travel' , (req, res) => {
   console.log('index route');
   Place.find({}, (error, allPlaces) => {
@@ -37,7 +39,9 @@ router.get('/travel' , (req, res) => {
 // new route
 router.get('/travel/new', (req, res) => {
   if (req.session.currentUser) {
-    res.render('new.ejs');
+    res.render('new.ejs', {
+      currentUser: req.session.currentUser
+    });
   } else {
     res.redirect('/travel/sessions/new');
   }
@@ -82,7 +86,8 @@ router.get('/travel/:id/edit', (req, res) => {
     } else {
       console.log('foundPlace edit=', foundPlace);
       res.render('edit.ejs', {
-        place: foundPlace
+        place: foundPlace,
+        currentUser: req.session.currentUser
       });
     }
   });

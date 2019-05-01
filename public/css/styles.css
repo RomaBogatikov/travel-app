@@ -37,7 +37,7 @@ header > div {
 
 header > div > a > span {
   position: absolute;
-  top: 50%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: whitesmoke;
@@ -45,7 +45,7 @@ header > div > a > span {
   font-size: 4rem;
   opacity: 0.9;
   background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 70%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.9) 70%, rgba(255,255,255,0) 100%);
 }
 
 header > div > a > img {

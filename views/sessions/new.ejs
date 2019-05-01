@@ -5,6 +5,22 @@
     <link rel="stylesheet" href="/css/styles_sessions_new.css">
   </head>
     <body>
+    <div class="container">
+      <header class="header">
+        <div class="left">
+        <a href="/travel">
+          <img src='../../images/travel.jpg'>
+          <span>Resfeber</span>
+        </a>
+        </div>
+        <div class="right">
+        <% if (!currentUser) {%>
+          <p>Resfeber (n.) Origin: Swedish. Definition: The restless race of the traveller's heart before the journey begins, when anxiety and anticipation are tangled together.</p>
+        <% } else {%>
+          <p style="font-size: 4rem; display: inline-block; margin: 0 auto;">Welcome, <%= currentUser.username %></p>
+        <% } %>
+        </div>
+      </header>
       <div class="wrapper">
         <h1>Log In</h1>
         <%# <div class="row"> %>
@@ -26,6 +42,7 @@
             </button>
           </form>
       </div>
+    </div>
     </body>
 </html>
 
