@@ -12,7 +12,6 @@ sessions.get('/new', (req, res) => {
 });
 
 
-
 // post route (to log in)
 sessions.post('/', (req, res) => {
   console.log('req.body=', req.body);
@@ -85,10 +84,12 @@ sessions.post('/comments', (req, res) => {
         console.log('updatedUser=', updatedUser);
       }
     });
-    res.redirect('/travel/' + req.body.place_id);
+    // res.redirect('/travel/' + req.body.place_id);
   // } catch (error) {
   //   console.log(error);
   // }
+
 })
+
 
 module.exports = sessions

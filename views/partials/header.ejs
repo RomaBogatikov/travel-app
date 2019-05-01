@@ -9,7 +9,7 @@
   <% if (!currentUser) {%>
     <p>Resfeber (n.) Origin: Swedish. Definition: The restless race of the traveller's heart before the journey begins, when anxiety and anticipation are tangled together.</p>
   <% } else {%>
-    <p style="font-size: 4rem; display: inline-block; margin: 0 auto;">Welcome, <%= currentUser.username %></p>
+    <p style="font-size: 4rem; display: inline-block; margin: 0 auto;">Welcome, <span class="name"><%= currentUser.username %></span></p>
   <% } %>
   </div>
 </header>
