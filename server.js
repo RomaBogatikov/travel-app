@@ -89,13 +89,11 @@ app.get('/seed', (req, res) => {
       city: "Milford",
       country: "USA",
       imgURL: "https://www.ci.milford.ct.us/sites/milfordct/files/imce/businesses_1.png",
-      comments: ['nice shore town']
     },
     {
       city: "New Haven",
       country: "USA",
       imgURL: "https://cdn.passporthealthusa.com/wp-content/uploads/2018/06/new-haven-clinic-temp-photo.jpg?x71414",
-      comments: ['home of Yale']
     },
     {
       city: "New York",
