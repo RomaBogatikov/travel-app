@@ -88,7 +88,7 @@ app.get('/seed', (req, res) => {
     {
       city: "Milford",
       country: "USA",
-      imgURL: "https://www.ci.milford.ct.us/sites/milfordct/files/imce/businesses_1.png",
+      imgURL: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/960015_10151597506669614_1784949868_n.jpg?_nc_cat=111&_nc_ht=scontent-lga3-1.xx&oh=3194d53c821e098449bf9461022e14d9&oe=5D77BDF9",
     },
     {
       city: "New Haven",

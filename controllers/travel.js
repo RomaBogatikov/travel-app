@@ -76,6 +76,7 @@ router.post('/travel', (req, res) => {
       res.redirect('/travel');
     }
   });
+
 });
 
 // edit route
