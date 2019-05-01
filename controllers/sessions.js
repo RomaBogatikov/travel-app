@@ -44,36 +44,51 @@ sessions.delete('/delete', (req, res)=>{
 
 
 // post route (to leave comments)
-sessions.post('/comments', async (req, res) => {
+sessions.post('/comments', (req, res) => {
   console.log('received comment', req.body);
-  try {
-    let place = await Place.findById(req.body.place_id);
-    let user = await User.findById(req.body.user_id);
-    console.log('place=', place);
-    console.log('user=', user);
-    let place_comments = place.comments.concat(req.body.username + ": " + req.body.comment);
-    let user_comments = user.comments.concat(req.body.comment);
-    console.log('place_comments=', place_comments);
-    console.log('user_comments=', user_comments);
-    Place.findByIdAndUpdate(req.body.place_id, {comments: place_comments}, {new: true}, (err, updatedPlace) => {
+  // try {
+    // let place = await Place.findById(req.body.place_id);
+    // let user = await User.findById(req.body.user_id);
+    // console.log('place=', place);
+    // console.log('user=', user);
+    // let place_comments = place.comments.concat(req.body.username + ": " + req.body.comment);
+    // let user_comments = user.comments.concat(req.body.comment);
+    // console.log('place_comments=', place_comments);
+    // console.log('user_comments=', user_comments);
+    // Place.findByIdAndUpdate(req.body.place_id, {comments: place_comments}, {new: true}, (err, updatedPlace) => {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     console.log('updatedPlace=', updatedPlace);
+    //   }
+    // });
+    // User.findByIdAndUpdate(req.body.user_id, {comments: user_comments}, {new: true}, (err, updatedUser) => {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     console.log('updatedUser=', updatedUser);
+    //   }
+    // });
+    // req.session.currentUser.comments.concat(req.body.comment);
+    // res.redirect('/travel/' + req.body.place_id);
+    Place.findByIdAndUpdate(req.body.place_id, {$push: {"comments": req.body.username + ": " + req.body.comment}}, {new: true}, (err, updatedPlace) => {
       if (err) {
         console.log(err);
       } else {
         console.log('updatedPlace=', updatedPlace);
       }
     });
-    User.findByIdAndUpdate(req.body.user_id, {comments: user_comments}, {new: true}, (err, updatedUser) => {
+    User.findByIdAndUpdate(req.body.user_id, {$push: {"comments": req.body.comment}}, {new: true}, (err, updatedUser) => {
       if (err) {
         console.log(err);
       } else {
         console.log('updatedUser=', updatedUser);
       }
     });
-    req.session.currentUser.comments.concat(req.body.comment);
     res.redirect('/travel/' + req.body.place_id);
-  } catch (error) {
-    console.log(error);
-  }
+  // } catch (error) {
+  //   console.log(error);
+  // }
 })
 
 module.exports = sessions
