@@ -68,8 +68,8 @@ router.get('/travel/:id', (req, res) => {
 });
 
 // post route (create)
-router.post('/travel', async (req, res) => {
-  try{
+router.post('/travel', (req, res) => {
+  // try{
     // KEYGOOGLE = 'AIzaSyBt9kqAILeZXEdz846f3Yn3oJG84j4SkH8';
     const KEYGOOGLE = process.env.GMAPS_API_KEY;
     console.log('create post route');
@@ -85,23 +85,15 @@ router.post('/travel', async (req, res) => {
     // resolveWithFullResponse: true
   };
 
-  var coordinates = await rp(options)
+  var coordinates = rp(options)
       .then(function (body) {
           // Request succeeded but might as well be a 404
           // Usually combined with resolveWithFullResponse = true to check response.statusCode
           console.log('body=', body.results[0].locations[0].latLng);
           let coordinates = body.results[0].locations[0].latLng;
-          return coordinates
-      })
-      .catch(function (err) {
-          // Request failed due to technical reasons...
-      });
+          // return coordinates
 
-
-  } catch (error) {
-    console.log(error)
-  }
-    console.log('result=', JSON.stringify(coordinates));
+    // console.log('result=', JSON.stringify(coordinates));
     req.body.coordinates = {};
     req.body.coordinates.lat = String(coordinates.lat);
     req.body.coordinates.lng = String(coordinates.lng);
@@ -114,6 +106,24 @@ router.post('/travel', async (req, res) => {
         res.redirect('/travel');
       }
     });
+
+
+
+
+
+      })
+      .catch(function (err) {
+          // Request failed due to technical reasons...
+      });
+
+
+  // } catch (error) {
+  //   console.log(error)
+  // }
+
+
+
+
 
 });
 
