@@ -90,23 +90,23 @@ router.post('/travel', (req, res) => {
           // Request succeeded but might as well be a 404
           // Usually combined with resolveWithFullResponse = true to check response.statusCode
           console.log('body=', body.results[0].locations[0].latLng);
-          let coordinates = body.results[0].locations[0].latLng;
+          let coordinate = body.results[0].locations[0].latLng;
           // return coordinates
 
-    // console.log('result=', JSON.stringify(coordinates));
-    req.body.coordinates = {};
-    req.body.coordinates.lat = String(coordinates.lat);
-    req.body.coordinates.lng = String(coordinates.lng);
-    console.log('req.body=', req.body);
-    Place.create(req.body, (error, createdPlace) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('createdPlace=', createdPlace);
-        res.redirect('/travel');
-      }
-    });
 
+                // console.log('result=', JSON.stringify(coordinates));
+                req.body.coordinates = {};
+                req.body.coordinates.lat = String(coordinate.lat);
+                req.body.coordinates.lng = String(coordinate.lng);
+                console.log('req.body=', req.body);
+                Place.create(req.body, (error, createdPlace) => {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log('createdPlace=', createdPlace);
+                    res.redirect('/travel');
+                  }
+                });
 
 
 
