@@ -76,29 +76,39 @@ router.post('/travel', (req, res) => {
     console.log('req.body=', req.body);
     // var KEY='lZkaliDxvBgp9v4kmuW5qDMEqPeZICMZ';
     const KEY = process.env.MAPQUEST_API_KEY;
-    var options = {
-      uri: `http://open.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=${req.body.city}`,
-      headers: {
-        'User-Agent': 'Request-Promise'
-    },
-    json: true, // Automatically parses the JSON string in the response
-    // resolveWithFullResponse: true
-  };
+  //   var options = {
+  //     uri: `http://open.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=${req.body.city}`,
+  //     headers: {
+  //       'User-Agent': 'Request-Promise'
+  //   },
+  //   json: true, // Automatically parses the JSON string in the response
+  //   // resolveWithFullResponse: true
+  // };
 
-  var coordinates = rp(options)
-      .then(function (body) {
-          // Request succeeded but might as well be a 404
-          // Usually combined with resolveWithFullResponse = true to check response.statusCode
-          console.log('body=', body.results[0].locations[0].latLng);
-          let coordinate = body.results[0].locations[0].latLng;
-          // return coordinates
+  // var coordinates = rp(options)
+  //     .then(function (body) {
+  //         // Request succeeded but might as well be a 404
+  //         // Usually combined with resolveWithFullResponse = true to check response.statusCode
+  //         console.log('body=', body.results[0].locations[0].latLng);
+  //         let coordinate = body.results[0].locations[0].latLng;
+  //         // return coordinates
 
 
-                // console.log('result=', JSON.stringify(coordinates));
-                req.body.coordinates = {};
-                req.body.coordinates.lat = String(coordinate.lat);
-                req.body.coordinates.lng = String(coordinate.lng);
-                console.log('req.body=', req.body);
+  //               // console.log('result=', JSON.stringify(coordinates));
+  //               req.body.coordinates = {};
+  //               req.body.coordinates.lat = String(coordinate.lat);
+  //               req.body.coordinates.lng = String(coordinate.lng);
+  //               console.log('req.body=', req.body);
+
+
+
+
+
+  //     })
+  //     .catch(function (err) {
+  //         // Request failed due to technical reasons...
+  //     });
+
                 Place.create(req.body, (error, createdPlace) => {
                   if (error) {
                     console.log(error);
@@ -107,14 +117,6 @@ router.post('/travel', (req, res) => {
                     res.redirect('/travel');
                   }
                 });
-
-
-
-
-      })
-      .catch(function (err) {
-          // Request failed due to technical reasons...
-      });
 
 
   // } catch (error) {
