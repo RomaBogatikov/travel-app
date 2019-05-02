@@ -3,6 +3,7 @@ const router = express.Router();
 // require Place model (collection 'places' in 'travel' database)
 const Place = require('../models/places.js');
 const session = require('express-session');
+const rp = require('request-promise');
 
 require('dotenv').config();
 
@@ -59,15 +60,47 @@ router.get('/travel/:id', (req, res) => {
       console.log('foundplace show=', foundPlace);
       res.render('show.ejs', {
         place: foundPlace,
-        currentUser: req.session.currentUser
+        currentUser: req.session.currentUser,
+        keygoogle: process.env.GMAPS_API_KEY
       });
     }
   });
 });
 
 // post route (create)
-router.post('/travel', (req, res) => {
-  console.log('create post route')
+router.post('/travel', async (req, res) => {
+  // KEYGOOGLE = 'AIzaSyBt9kqAILeZXEdz846f3Yn3oJG84j4SkH8';
+  KEYGOOGLE = process.env.GMAPS_API_KEY;
+  console.log('create post route');
+  console.log('req.body=', req.body);
+  // var KEY='lZkaliDxvBgp9v4kmuW5qDMEqPeZICMZ';
+  const KEY = process.env.MAPQUEST_API_KEY;
+  var options = {
+    uri: `http://open.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=${req.body.city}`,
+    headers: {
+      'User-Agent': 'Request-Promise'
+  },
+  json: true, // Automatically parses the JSON string in the response
+  // resolveWithFullResponse: true
+};
+
+let coordinates = await rp(options)
+    .then(function (body) {
+        // Request succeeded but might as well be a 404
+        // Usually combined with resolveWithFullResponse = true to check response.statusCode
+        console.log('body=', body.results[0].locations[0].latLng);
+        let coordinates = body.results[0].locations[0].latLng;
+        return coordinates
+    })
+    .catch(function (err) {
+        // Request failed due to technical reasons...
+    });
+
+  console.log('result=', JSON.stringify(coordinates));
+  req.body.coordinates = {};
+  req.body.coordinates.lat = String(coordinates.lat);
+  req.body.coordinates.lng = String(coordinates.lng);
+  console.log('req.body=', req.body);
   Place.create(req.body, (error, createdPlace) => {
     if (error) {
       console.log(error);
@@ -76,7 +109,6 @@ router.post('/travel', (req, res) => {
       res.redirect('/travel');
     }
   });
-
 });
 
 // edit route
@@ -121,8 +153,6 @@ router.delete('/travel/:id', (req, res) => {
     }
   });
 });
-
-
 
 
 module.exports = router;

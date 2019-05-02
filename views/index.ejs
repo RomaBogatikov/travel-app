@@ -90,7 +90,14 @@
           </form>
         <% } %>
       <% } else { %>
-        <a href="/travel/<%= places[i].id%>"><img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"></a>
+        <a href="/travel/<%= places[i].id%>">
+        <div class="img_container">
+          <img class="card_img image" src= "https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image">
+          <div class="middle">
+            <div class="text">Explore!</div>
+          </div>
+        </div>
+        </a>
       <% } %>
 
       </div>

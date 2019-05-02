@@ -5,7 +5,10 @@ const placeSchema = new mongoose.Schema({
   country: {type: String, required: true},
   imgURL: String,
   comments: [String],
-  coordinates: String
+  coordinates: {
+    "lat": String,
+    "lng": String
+  }
 })
 
 const Place = mongoose.model('Place', placeSchema);
