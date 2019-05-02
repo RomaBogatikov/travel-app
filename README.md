@@ -1,4 +1,4 @@
-# Alt-Resfeber (not an another travel-app)
+# Resfeber (not an another travel-app)
 
 ## Overview
 
@@ -6,7 +6,7 @@ The app gives the user a list of travel destinations to explore. Once logged in,
 
 ## Technoligies used
 
-The app uses JavaScript/jQuery/CSS/HTML, with a particular focus on using ExpressJS, MongoDB (with Mongoose). NPM packages include dotenv, bcrypt, express-session, ejs, method-override, body-parser.
+The app uses JavaScript/jQuery/CSS/HTML, with a particular focus on using ExpressJS, MongoDB (with Mongoose) and demonstrating RESTful routes. NPM packages include dotenv, bcrypt, express-session, ejs, method-override, body-parser.
 The app was built using Skeleton framework.
 
 ## Future improvements
