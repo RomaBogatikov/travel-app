@@ -4,26 +4,20 @@
 $( () => {
 
   $(".submit_comment").on("click", (event) => {
-    // console.log('moused over');
     let name = $('.name').text();
     let comment = $(event.currentTarget).parent().children().eq(4).val();
-    // console.log(comment);
     let newListItem = $('<li>').text(name + ": " + comment);
-    // console.log('newListItem=', newListItem);
     $(".list_of_comments").append(newListItem);
   });
 
 
   let aboveHeight = $('header').outerHeight();
-  console.log('aboveHeight=', aboveHeight);
   let navHeight = $("nav").outerHeight();
 
 
   // when scroll
   $('.container').scroll(function(){
       let containerWidth = $(".container").outerWidth();
-      console.log('aboveHeight=', aboveHeight);
-      console.log('scrollTop=', $('.container').scrollTop());
       // if scrolled down more than the header’s height
       if ($('.container').scrollTop() > aboveHeight){
 
