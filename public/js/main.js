@@ -1,3 +1,5 @@
+// jQuery is used to display user comments without reloading the page and to implement a sticky navbar
+
 // document onready function
 $( () => {
 

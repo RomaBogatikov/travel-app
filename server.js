@@ -41,9 +41,16 @@ db.on('open' , ()=>{});
 //Middleware
 /////////////
 
+// sessions controller
+app.use(session({
+  secret: process.env.SECRET,
+  // secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}))
+
 //use public folder for static assets
 app.use(express.static('public'));
-
 
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
@@ -60,13 +67,7 @@ app.use('/travel/users/', usersController)
 // use favoritesController
 app.use('/travel/favorites', favoritesController);
 
-// sessions controller
-app.use(session({
-  secret: process.env.SECRET,
-  // secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}))
+// use sessionsController
 app.use('/travel/sessions/', sessionsController);
 
 
@@ -78,7 +79,6 @@ app.use('/travel/sessions/', sessionsController);
 // RESTful routes are in controllers/travel.js
 // need this route for heroku deployment
 app.get('/', (req, res) => {
-  // res.send('<a href="/travel/">Test</a>');
   res.redirect('/travel');
 })
 
