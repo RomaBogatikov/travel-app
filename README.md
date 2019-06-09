@@ -1,4 +1,5 @@
 # Resfeber (not an another travel-app)
+The app is hosted on Heroku: [Resfeber (travel-app)](https://fathomless-chamber-12178.herokuapp.com/travel)
 
 ## Overview
 
@@ -14,7 +15,7 @@ Moreover, two APIs were used:
 
 ## User stories
 <li>When the app is loaded, the list of all destinations is displayed</li>
-<li>User can edit and delete travel destinations from the list (implemented that way intentionally to let potential employers see the app works without logging in)</li>
+<li>User can edit and delete travel destinations from the list (implemented that way intentionally to let users see the app works without logging in)</li>
 <li>When the user clicks on the place card, the user is redirected to a show page, where comments are displayed along with a Google map centered at a particular place</li>
 <li>When a user logs in, the the user is greeted using username, navbar changes to display 'New place', 'Favorites', 'Log Out' buttons and the user can create a new place, add existing places to favorites and write comments</li>
 <li>When the user clicks 'Create New User Button' a sign up form is displayed.</li>
@@ -23,10 +24,6 @@ Moreover, two APIs were used:
 <li>If a user that signed up before tries to sign up, the app notifies to go to login instead</li>
 <li>If the user provides a wrong username or password, the app notifies about that</li>
 <li>User password is encrypted with bcrypt</li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
 
 ## Future improvements
 
